@@ -6,6 +6,28 @@ Build the entry for make.fun's bounty **"Sum up 24 November's world news in one 
 world's news of **Tuesday 24 November 2026**. Prize: $100 USDC, top 50 entries
 (1st $20, 2nd $12, 3rd $6, 4th–10th $2, 11th–50th $1.20).
 
+## ⚠️ REDO (2026-11-24) — the v1 entry cannot be submitted
+The v1 `entry.png` and `tools/` layout source were built **outside** a recorded
+session and swapped in afterwards, so the v1 transcripts contain zero lines of
+them. make.fun's `transcripts_witnessed` check fails such entries: they rank
+but take **no paid place**. The v1 transcripts are void. This redo fixes that:
+- Start a **brand-new recorded session** for this redo (this session's
+  transcripts + usage are the ones that will be submitted).
+- **Delete first, then write fresh:** remove the existing `entry.png`,
+  `tools/poster.html` and `main.py`, then write new versions yourself in this
+  session with your write/edit tools. Do NOT copy the old files back with
+  `cp`, `git checkout`, `git restore`, or by pasting their full contents —
+  the code must be lines you authored in this session. (Reading the old files
+  as a design reference is fine; reproducing them byte-for-byte by copy is not.)
+- You write the layout source, you rasterize `entry.png` yourself, you write
+  `main.py` yourself, you commit yourself.
+- Make the entry self-contained: everything the build needs must be in this
+  repo — the old `tools/poster.html` referenced fonts (`Inter-*.ttf`,
+  `ArchivoBlack`) that were NOT in the repo. Vendor the fonts in, or use
+  fonts that are guaranteed present.
+- The layout spec for the redo is supplied with your opening prompt; follow it,
+  but the code is yours to write.
+
 ## Deliverables (in this repo, on branch `main`)
 1. `main.ts` (Node 22, standard library only, no network) **or** `main.py`
    (Python 3.13, stdlib only) at the repo root. It writes one image to
