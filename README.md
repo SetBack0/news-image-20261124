@@ -16,7 +16,8 @@ mkdir -p out && MAKEFUN_OUTPUT_DIR=out python3 main.py
 
 `entry.png` is a 1024x1024 poster covering nine stories first reported on 24 November 2026
 (Middle East, Europe, climate, tech, Asia, Americas, Africa, markets), composed by hand as
-HTML/SVG and rasterised; the source layout is in `tools/poster.html`.
+HTML/SVG and rasterised; the source layout is in `tools/poster.html` (renders with Inter and
+Archivo Black installed, falls back to Arial otherwise).
 `main.py` copies it byte-for-byte to `$MAKEFUN_OUTPUT_DIR/entry.png` and verifies the write,
 so two runs always produce identical bytes.
 
