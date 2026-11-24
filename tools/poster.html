@@ -1,205 +1,387 @@
-<!doctype html><html><head><meta charset="utf-8"><style>
-@font-face{font-family:Playfair;src:url(fonts/PlayfairDisplay-900.ttf);font-weight:900}
-@font-face{font-family:Playfair;src:url(fonts/PlayfairDisplay-700.ttf);font-weight:700}
-@font-face{font-family:InterTight;src:url(fonts/InterTight-400.ttf);font-weight:400}
-@font-face{font-family:InterTight;src:url(fonts/InterTight-600.ttf);font-weight:600}
-@font-face{font-family:InterTight;src:url(fonts/InterTight-800.ttf);font-weight:800}
-@font-face{font-family:Barlow;src:url(fonts/BarlowCondensed-500.ttf);font-weight:500}
-@font-face{font-family:Barlow;src:url(fonts/BarlowCondensed-600.ttf);font-weight:600}
-@font-face{font-family:Barlow;src:url(fonts/BarlowCondensed-700.ttf);font-weight:700}
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{width:1024px;height:1024px;overflow:hidden}
-body{font-family:InterTight,Arial,sans-serif;color:#15171C;-webkit-font-smoothing:antialiased;
- background:linear-gradient(#F8F5ED,#EFEBE0)}
-.page{position:relative;width:1024px;height:1024px;padding:12px 18px 0}
-.page:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.30;
- background-image:repeating-linear-gradient(0deg,rgba(20,23,28,.05) 0 1px,transparent 1px 4px)}
-.rail{display:flex;justify-content:space-between;font-family:Barlow;font-size:11px;font-weight:700;
- letter-spacing:.20em;text-transform:uppercase;color:#5C6270;border-bottom:1.5px solid #15171C;padding-bottom:4px}
-.kick{font-family:Barlow;font-size:11.5px;font-weight:700;letter-spacing:.34em;color:#B3202C;text-transform:uppercase;margin-top:6px}
-h1{font-family:Playfair;font-size:84px;line-height:.94;letter-spacing:-.014em}
-.deck{font-size:14px;font-weight:600;color:#3A3F4A;margin-top:1px}
-.deck b{color:#B3202C}
-.tabs{display:flex;gap:5px;margin-top:6px;justify-content:space-between}
-.tab{font-family:Barlow;font-size:11px;font-weight:700;letter-spacing:.12em;color:#fff;background:var(--c);
- padding:2px 7px 1px;border-radius:2px}
-.tab b{font-weight:700;opacity:.72;margin-left:4px}
-.band{display:grid;grid-template-columns:644px 328px;gap:10px;margin-top:8px;height:234px}
-.hero{grid-row:span 1;background:#fff;border:1px solid #D6D1C4;border-top:5px solid var(--c);padding:10px 12px 0;display:flex;flex-direction:column;overflow:hidden}
-.krow{display:flex;align-items:center;gap:6px}
-.num{font-family:Barlow;font-size:13px;font-weight:700;color:#fff;background:var(--c);padding:0 4px;line-height:16px}
-.place{font-family:Barlow;font-size:11.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:#3A3F4A}
-.sec{font-family:Barlow;font-size:10.5px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--c)}
-.krow .sec{margin-left:auto}
-.pill{font-family:Barlow;font-size:9px;font-weight:700;letter-spacing:.10em;padding:1px 4px;border:1px solid}
-.pill.ok{color:#1E7A4B;border-color:#1E7A4B}
-.pill.claim{color:#B26A00;border-color:#B26A00}
-.pill.live{color:#1F4E9C;border-color:#1F4E9C}
-.hero h2{font-family:Playfair;font-weight:900;font-size:33px;line-height:.96;letter-spacing:-.018em;margin-top:6px}
-.hero p{font-size:11.5px;line-height:1.34;color:#454B57;margin-top:6px}
-.hero p b{font-family:Barlow;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#8A909C;font-weight:600}
-.chips{display:flex;gap:6px;margin-top:8px}
-.chips span{font-family:Barlow;font-size:10px;font-weight:600;letter-spacing:.04em;background:#F1EDE2;border:1px solid #DCD6C8;padding:2px 6px}
-.chips b{font-weight:700;color:#B3202C}
-.hbody{display:grid;grid-template-columns:1fr 246px;gap:12px;margin-top:4px;flex:1;min-height:0}
-.hmap{position:relative}
-.strait{width:100%;height:100%;display:block;border:1px solid #D6D1C4}
-.stack{display:grid;grid-template-rows:1fr 1fr;gap:10px;height:234px}
-.side{background:#fff;border:1px solid #D6D1C4;border-left:4px solid var(--c);padding:8px 10px;display:flex;flex-direction:column}
-.side h3{font-family:Playfair;font-weight:900;font-size:22px;line-height:.99;letter-spacing:-.01em;margin-top:3px}
-.side p{font-size:10.5px;line-height:1.28;color:#545B67;margin-top:3px}
-.side .sec{margin-top:4px}
-.numbers{background:#FFFDF7;color:#15171C;padding:0;margin-top:7px;height:56px;display:grid;grid-template-columns:repeat(6,1fr);border-top:2px solid #15171C;border-bottom:2px solid #15171C}
-.numbers .t{display:none}
-.nb{padding:6px 9px;display:flex;align-items:baseline;gap:6px;border-left:1px solid #DDD7C9}
-.nb .v{font-family:Playfair;font-weight:900;font-size:25px;line-height:.9;white-space:nowrap}
-.nb .k{font-size:8.6px;line-height:1.14;color:#5C6270}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:92px 92px;gap:8px;margin-top:9px}
-.card{background:#fff;border:1px solid #D9D4C7;border-left:3px solid var(--c);padding:6px 8px;overflow:hidden}
-.card .num{font-size:11px;line-height:14px}
-.card .place{font-size:10px}
-.card .pill{margin-left:auto}
-.card h3{font-size:15.5px;font-weight:800;line-height:1.05;letter-spacing:-.012em;margin-top:4px}
-.card p{font-size:9.6px;line-height:1.26;color:#5B616D;margin-top:3px}
-.bottom{display:grid;grid-template-columns:1fr 322px;gap:10px;margin-top:9px;height:284px}
-.briefs{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.briefs ul{list-style:none;display:flex;flex-direction:column}
-.briefs li{display:flex;gap:5px;padding:2.4px 0;border-bottom:1px dotted #C7C2B4}
-.bnum{font-family:Barlow;font-size:9.5px;font-weight:700;color:var(--c);padding-top:1px}
-.btxt b{display:block;font-size:11.6px;line-height:1.15;font-weight:600}
-.btxt i{display:block;font-style:normal;font-family:Barlow;font-size:9.4px;color:#8A909C;letter-spacing:.04em;margin-top:1px}
-.mapbox{background:#fff;border:1px solid #D9D4C7;padding:7px 8px;display:flex;flex-direction:column}
-.mapbox .mt{font-family:Barlow;font-size:9.8px;font-weight:700;letter-spacing:.20em;color:#3A3F4A}
-.mapbox .ms{font-size:8.4px;color:#8A909C;margin-top:1px}
-.mapwrap{position:relative;width:304px;margin:3px auto 0}
-.mapwrap img{width:100%;display:block;opacity:1}
-.pin{position:absolute;transform:translate(-50%,-50%);width:13px;height:13px;border-radius:50%;
- background:#fff;border:1.8px solid var(--c);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 1px #fff}
-.pin b{font-family:Barlow;font-size:7px;font-weight:700;color:var(--c);line-height:1}
-.datecheck{margin-top:auto;border-top:1.5px solid #15171C;padding-top:4px;display:flex;gap:6px;align-items:baseline}
-.datecheck .dc{font-family:Barlow;font-size:9px;font-weight:700;letter-spacing:.14em;color:#fff;background:#B3202C;padding:1px 4px}
-.datecheck .dt{font-size:9px;line-height:1.2;color:#3A3F4A}
-.foot{display:flex;justify-content:space-between;gap:10px;margin-top:4px;font-family:Barlow;font-size:8.4px;color:#6B7180}
-.foot b{color:#15171C;font-weight:700}
-</style></head><body><div class="page">
-<div class="rail"><span>The world in one day · front page</span><span>29 stories · 6 regions · 24 Nov 2026</span></div>
-<div class="kick">World news · Tuesday edition</div>
-<h1>24 November 2026</h1>
-<div class="deck"><b>Hormuz ablaze</b> as a US blockade meets Iran · COP31 collapses without a pact · Nvidia takes Huang back</div>
-<div class="tabs"><span class="tab" style="--c:#1F4E9C">EUROPE<b>6</b></span><span class="tab" style="--c:#B3202C">MIDDLE EAST<b>4</b></span><span class="tab" style="--c:#1E7A4B">AFRICA<b>4</b></span><span class="tab" style="--c:#C0661A">ASIA<b>7</b></span><span class="tab" style="--c:#5B3E96">AMERICAS<b>5</b></span><span class="tab" style="--c:#0E6E77">OCEANIA<b>2</b></span><span class="tab" style="--c:#333A45">WORLD<b>1</b></span></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The World In One Day — 24 November 2026</title>
+<style>
+  /* ---------- vendored fonts (assets/fonts, relative to tools/) ---------- */
+  @font-face { font-family:'Playfair Display'; font-weight:700; src:url('../assets/fonts/PlayfairDisplay-700.ttf') format('truetype'); }
+  @font-face { font-family:'Playfair Display'; font-weight:900; src:url('../assets/fonts/PlayfairDisplay-900.ttf') format('truetype'); }
+  @font-face { font-family:'Inter Tight'; font-weight:400; src:url('../assets/fonts/InterTight-400.ttf') format('truetype'); }
+  @font-face { font-family:'Inter Tight'; font-weight:600; src:url('../assets/fonts/InterTight-600.ttf') format('truetype'); }
+  @font-face { font-family:'Inter Tight'; font-weight:800; src:url('../assets/fonts/InterTight-800.ttf') format('truetype'); }
+  @font-face { font-family:'Barlow Condensed'; font-weight:500; src:url('../assets/fonts/BarlowCondensed-500.ttf') format('truetype'); }
+  @font-face { font-family:'Barlow Condensed'; font-weight:600; src:url('../assets/fonts/BarlowCondensed-600.ttf') format('truetype'); }
+  @font-face { font-family:'Barlow Condensed'; font-weight:700; src:url('../assets/fonts/BarlowCondensed-700.ttf') format('truetype'); }
 
-<div class="numbers"><div class="t">The day in numbers</div><div class="nb"><span class="v">12,000</span><span class="k">fled Co-op Live arena</span></div><div class="nb"><span class="v">$88.97</span><span class="k">Brent crude, a three-month low</span></div><div class="nb"><span class="v">548</span><span class="k">commutations Trump wants reversed</span></div><div class="nb"><span class="v">+31%</span><span class="k">Nvidia's jump on Huang's return</span></div><div class="nb"><span class="v">26</span><span class="k">body bags pulled from the Banten fire</span></div><div class="nb"><span class="v">+6.1%</span><span class="k">Singapore's GDP growth in Q3</span></div></div>
-<div class="band">
-<article class="hero" style="--c:#B3202C">
-  <div class="krow"><span class="num">01</span><span class="place">Strait of Hormuz</span><span class="pill claim">CLAIM</span>
-    <span class="sec">Middle East · Energy war</span></div>
-  <div class="hbody">
-    <div>
-      <h2>Three tankers burn on mines as the US blockade closes in</h2>
-      <p>IRGC says the ships hit naval mines under US escort; Tehran vows to break the blockade by all means. <b>Al Jazeera</b></p>
-      <div class="chips"><span><b>3</b> tankers ablaze</span><span><b>$88.97</b> Brent</span></div>
+  :root{
+    --ink:#15171C; --grey:#5C6270; --midgrey:#3A3F4A;
+    --paper1:#F8F5ED; --paper2:#EFEBE0;
+    --red:#B3202C;
+    --eu:#1F4E9C; --me:#B3202C; --af:#1E7A4B; --as:#C0661A; --am:#5B3E96; --oc:#0E6E77; --wo:#333A45;
+    --hairline:#C9C2B2; --cardline:#D6D1C4; --chip:#F1EDE2;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html,body{ width:1024px; height:1024px; overflow:hidden; }
+  body{
+    font-family:'Inter Tight',Arial,sans-serif; color:var(--ink);
+    background:linear-gradient(180deg,var(--paper1) 0%,var(--paper2) 100%);
+  }
+  .page{ height:1024px; padding:12px 18px; display:flex; flex-direction:column; }
+
+  /* ---------- a) rail ---------- */
+  .rail{
+    display:flex; justify-content:space-between; align-items:center;
+    font:700 11px/1 'Barlow Condensed'; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--grey); border-bottom:1.5px solid var(--ink); padding-bottom:4px;
+  }
+  /* ---------- b) kicker ---------- */
+  .kicker{
+    margin-top:5px;
+    font:700 11.5px/1 'Barlow Condensed'; letter-spacing:.34em; text-transform:uppercase;
+    color:var(--red);
+  }
+  /* ---------- c) h1 ---------- */
+  h1{
+    font:900 84px/0.94 'Playfair Display'; letter-spacing:-.01em;
+    margin-top:5px;
+  }
+  /* ---------- d) deck ---------- */
+  .deck{ margin-top:7px; font:600 14px/1.25 'Inter Tight'; color:var(--midgrey); }
+  .deck .hot{ color:var(--red); }
+  /* ---------- e) region tabs ---------- */
+  .tabs{ margin-top:7px; display:flex; justify-content:space-between; }
+  .tab{ font:700 11px/1.1 'Barlow Condensed'; letter-spacing:.08em; color:#fff; padding:2.5px 7px; white-space:nowrap; }
+  .tab i{ font-style:normal; font-weight:500; opacity:.85; margin-left:4px; }
+  /* ---------- f) numbers band ---------- */
+  .numbers{
+    margin-top:7px; height:56px; background:#fff;
+    border-top:2px solid var(--ink); border-bottom:2px solid var(--ink);
+    display:flex;
+  }
+  .num{ flex:1; display:flex; align-items:center; gap:7px; padding:0 9px; min-width:0; }
+  .num + .num{ border-left:1px solid var(--hairline); }
+  .num b{ font:900 25px/1 'Playfair Display'; white-space:nowrap; flex:none; }
+  .num span{ font:600 8.6px/1.15 'Inter Tight'; color:var(--grey); min-width:0; }
+
+  /* ---------- shared card bits ---------- */
+  .pill{ font:700 8.5px/1 'Barlow Condensed'; letter-spacing:.09em; padding:1.5px 6px; border-radius:8px; white-space:nowrap; }
+  .pill.reported{ background:#E8E4D8; color:var(--midgrey); }
+  .pill.claim{ background:var(--red); color:#fff; }
+  .pill.ongoing{ background:var(--as); color:#fff; }
+  .nsq{ display:inline-flex; align-items:center; justify-content:center; color:#fff; flex:none; font-family:'Barlow Condensed'; font-weight:700; }
+  .place{ font:700 11.5px/1 'Barlow Condensed'; letter-spacing:.07em; text-transform:uppercase; }
+  .section{ font:600 10.5px/1 'Barlow Condensed'; letter-spacing:.09em; text-transform:uppercase; }
+
+  /* ---------- g) hero band ---------- */
+  .hero{ margin-top:8px; height:234px; display:flex; gap:16px; }
+  .lead{
+    width:644px; background:#fff; border:1px solid var(--cardline); border-top:5px solid var(--me);
+    padding:10px 12px; display:flex; flex-direction:column;
+  }
+  .lead-head{ display:flex; align-items:center; gap:7px; }
+  .lead-head .nsq{ width:18px; height:18px; font-size:13px; }
+  .lead-head .pill{ margin-left:auto; }
+  .lead-body{ flex:1; display:flex; gap:12px; margin-top:6px; min-height:0; }
+  .lead-text{ flex:1; min-width:0; display:flex; flex-direction:column; }
+  .lead h2{ font:900 33px/0.96 'Playfair Display'; letter-spacing:-.005em; margin-top:5px; }
+  .lead .ldeck{ margin-top:7px; font:400 11.5px/1.3 'Inter Tight'; color:var(--midgrey); }
+  .chips{ margin-top:auto; display:flex; gap:6px; }
+  .chip{ font:600 10px/1 'Barlow Condensed'; letter-spacing:.05em; background:var(--chip); padding:3px 8px; white-space:nowrap; }
+  .lead-map{ width:246px; flex:none; }
+  .lead-map svg{ width:246px; height:100%; display:block; }
+
+  .side{ width:328px; flex:none; display:flex; flex-direction:column; gap:8px; }
+  .stack{
+    flex:1; background:#fff; border:1px solid var(--cardline); border-left:4px solid;
+    padding:8px 10px; display:flex; flex-direction:column; min-height:0;
+  }
+  .stack-head{ display:flex; align-items:center; gap:6px; }
+  .stack-head .nsq{ width:16px; height:16px; font-size:11px; }
+  .stack-head .pill{ margin-left:auto; }
+  .stack h3{ font:900 21px/0.98 'Playfair Display'; margin-top:4px; }
+  .stack .sdeck{ margin-top:4px; font:400 10.5px/1.25 'Inter Tight'; color:var(--midgrey); }
+
+  /* ---------- h) card grid ---------- */
+  .cards{ margin-top:8px; display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:92px 92px; gap:8px; }
+  .card{
+    background:#fff; border:1px solid var(--cardline); border-left:3px solid;
+    padding:6px 8px; display:flex; flex-direction:column; min-width:0; overflow:hidden;
+  }
+  .card-head{ display:flex; align-items:center; gap:5px; }
+  .card-head .nsq{ width:14px; height:14px; font-size:10px; }
+  .card-head .place{ font-size:10.5px; }
+  .card-head .pill{ margin-left:auto; }
+  .card h4{ margin-top:2px; font:800 15.5px/1.05 'Inter Tight'; letter-spacing:-.01em; }
+  .card .cdeck{ margin-top:2px; font:400 9.6px/1.2 'Inter Tight'; color:var(--grey); }
+
+  /* ---------- i) bottom: briefs + map card ---------- */
+  .bottom{ margin-top:8px; height:284px; display:flex; gap:8px; }
+  .briefs{ width:658px; flex:none; display:flex; gap:8px; }
+  .bcol{ flex:1; min-width:0; }
+  .brief{ padding:2px 0; border-bottom:1px dotted var(--hairline); font-size:10.8px; line-height:1.06; }
+  .brief:first-child{ padding-top:0; }
+  .bnum{ font:700 9.5px/1 'Barlow Condensed'; margin-right:3px; }
+  .bh{ font:600 10.8px/1.06 'Inter Tight'; letter-spacing:-.01em; }
+  .bs{ display:block; font:500 8.8px/1.1 'Barlow Condensed'; letter-spacing:.05em; color:var(--grey); text-transform:uppercase; margin-top:0; }
+
+  .mapcard{ flex:1; background:#fff; border:1px solid var(--cardline); padding:8px 9px; display:flex; flex-direction:column; min-width:0; }
+  .mapcard .mh1{ font:700 9.8px/1 'Barlow Condensed'; letter-spacing:.18em; }
+  .mapcard .mh2{ font:500 8.4px/1 'Barlow Condensed'; letter-spacing:.06em; color:var(--grey); margin-top:2px; }
+  .mapwrap{ position:relative; margin-top:5px; }
+  .mapwrap img{ width:304px; height:155px; display:block; }
+  .pin{
+    position:absolute; box-sizing:border-box; width:13px; height:13px; border-radius:50%;
+    background:#fff; border:1.8px solid; transform:translate(-50%,-50%);
+    display:flex; align-items:center; justify-content:center;
+    font:700 7px/1 'Barlow Condensed'; color:var(--ink);
+  }
+  .datecheck{
+    margin-top:auto; background:var(--chip); border-left:3px solid var(--red);
+    padding:5px 8px; font:400 9.4px/1.3 'Inter Tight'; color:var(--midgrey);
+  }
+  .datecheck b{ font:700 9px/1 'Barlow Condensed'; letter-spacing:.14em; color:var(--red); margin-right:5px; }
+
+  /* ---------- j) footer ---------- */
+  .footer{ margin-top:7px; font:500 8.4px/1.4 'Barlow Condensed'; letter-spacing:.05em; color:var(--grey); }
+  .footer b{ font-weight:700; color:var(--midgrey); letter-spacing:.1em; }
+  .footer .src{ margin-top:1px; }
+
+  /* region helpers */
+  .r-eu{ background:var(--eu); } .r-me{ background:var(--me); } .r-af{ background:var(--af); }
+  .r-as{ background:var(--as); } .r-am{ background:var(--am); } .r-oc{ background:var(--oc); } .r-wo{ background:var(--wo); }
+  .t-eu{ color:var(--eu); } .t-me{ color:var(--me); } .t-af{ color:var(--af); } .t-as{ color:var(--as); }
+  .t-am{ color:var(--am); } .t-oc{ color:var(--oc); } .t-wo{ color:var(--wo); }
+  .b-eu{ border-left-color:var(--eu); } .b-me{ border-left-color:var(--me); } .b-af{ border-left-color:var(--af); }
+  .b-as{ border-left-color:var(--as); } .b-am{ border-left-color:var(--am); } .b-oc{ border-left-color:var(--oc); } .b-wo{ border-left-color:var(--wo); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- a) rail -->
+  <div class="rail">
+    <span>THE WORLD IN ONE DAY · FRONT PAGE</span>
+    <span>33 STORIES · 7 REGIONS · 24 NOV 2026</span>
+  </div>
+
+  <!-- b) kicker -->
+  <div class="kicker">WORLD NEWS · TUESDAY EDITION</div>
+
+  <!-- c) headline -->
+  <h1>24 November 2026</h1>
+
+  <!-- d) deck -->
+  <p class="deck"><span class="hot">Hormuz ablaze as a US blockade meets Iran</span> · COP31 collapses without a pact · Nvidia takes Huang back</p>
+
+  <!-- e) region tabs -->
+  <div class="tabs">
+    <span class="tab r-eu">EUROPE<i>7</i></span>
+    <span class="tab r-me">MIDDLE EAST<i>4</i></span>
+    <span class="tab r-af">AFRICA<i>4</i></span>
+    <span class="tab r-as">ASIA<i>10</i></span>
+    <span class="tab r-am">AMERICAS<i>5</i></span>
+    <span class="tab r-oc">OCEANIA<i>2</i></span>
+    <span class="tab r-wo">WORLD<i>1</i></span>
+  </div>
+
+  <!-- f) numbers band -->
+  <div class="numbers">
+    <div class="num"><b>12,000</b><span>fled Co-op Live arena</span></div>
+    <div class="num"><b>$88.97</b><span>Brent crude, a three-month low</span></div>
+    <div class="num"><b>548</b><span>commutations Trump wants reversed</span></div>
+    <div class="num"><b>+31%</b><span>Nvidia's jump on Huang's return</span></div>
+    <div class="num"><b>26</b><span>body bags pulled from the Banten fire</span></div>
+    <div class="num"><b>+6.1%</b><span>Singapore's GDP growth in Q3</span></div>
+  </div>
+
+  <!-- g) hero band -->
+  <div class="hero">
+    <div class="lead">
+      <div class="lead-head">
+        <span class="nsq r-me">1</span>
+        <span class="place">Strait of Hormuz</span>
+        <span class="section t-me">Energy war</span>
+        <span class="pill claim">CLAIM</span>
+      </div>
+      <div class="lead-body">
+        <div class="lead-text">
+          <h2>Three tankers burn on mines as the US blockade closes in</h2>
+          <p class="ldeck">IRGC says the ships hit naval mines under US escort; Tehran vows to break the blockade by all means.</p>
+          <div class="chips">
+            <span class="chip">3 tankers ablaze</span>
+            <span class="chip">$88.97 Brent</span>
+          </div>
+        </div>
+        <div class="lead-map">
+          <!-- Strait of Hormuz, schematic -->
+          <svg viewBox="0 0 300 210" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="300" height="210" fill="#E7EDF1"/>
+            <!-- Iran across the top -->
+            <path d="M0,0 L300,0 L300,26 L258,30 C238,32 222,36 204,38 C186,40 168,44 148,46 C120,49 92,46 64,42 C42,39 20,36 0,34 Z"
+                  fill="#DDD6C6" stroke="#C3BBA8" stroke-width="1.4"/>
+            <!-- Oman peninsula + UAE coast, bottom right -->
+            <path d="M226,210 L228,150 C229,136 236,128 248,124 L258,120 C268,117 276,124 279,136 L284,162 L292,210 Z"
+                  fill="#DDD6C6" stroke="#C3BBA8" stroke-width="1.4"/>
+            <path d="M160,210 L164,196 C176,192 190,196 202,200 L212,210 Z"
+                  fill="#DDD6C6" stroke="#C3BBA8" stroke-width="1.2"/>
+            <!-- Qatar -->
+            <path d="M118,150 L122,138 L127,146 L124,158 Z" fill="#DDD6C6" stroke="#C3BBA8" stroke-width="1"/>
+            <!-- shipping lane: gulf -> strait -> gulf of oman -->
+            <path d="M28,74 C80,88 130,96 172,102 C204,107 232,108 284,112"
+                  fill="none" stroke="#1F7FA8" stroke-width="2.2" stroke-dasharray="5 4" stroke-linecap="round"/>
+            <!-- blockade line on the gulf-of-oman side -->
+            <path d="M246,84 C250,96 250,110 244,126" fill="none" stroke="#B3202C" stroke-width="3" stroke-linecap="round"/>
+            <!-- tankers with fire dots -->
+            <g>
+              <rect x="146" y="86" width="20" height="7" rx="3" transform="rotate(8 156 89)" fill="#333A45"/>
+              <circle cx="158" cy="82" r="3.2" fill="#B3202C"/>
+              <rect x="188" y="97" width="20" height="7" rx="3" transform="rotate(10 198 100)" fill="#333A45"/>
+              <circle cx="200" cy="92" r="3.2" fill="#B3202C"/>
+              <rect x="216" y="104" width="20" height="7" rx="3" transform="rotate(12 226 107)" fill="#333A45"/>
+              <circle cx="228" cy="99" r="3.2" fill="#B3202C"/>
+            </g>
+            <!-- labels -->
+            <g font-family="'Barlow Condensed'" fill="#5C6270">
+              <text x="96" y="20" font-size="15" font-weight="700" letter-spacing="2" fill="#8A8271">IRAN</text>
+              <text x="252" y="186" font-size="13" font-weight="700" letter-spacing="2" fill="#8A8271">OMAN</text>
+              <text x="30" y="62" font-size="11" font-weight="600" font-style="italic" letter-spacing="1.5">PERSIAN GULF</text>
+              <text x="150" y="70" font-size="11" font-weight="700" letter-spacing="1.5" fill="#1F7FA8">HORMUZ</text>
+              <text x="212" y="145" font-size="10" font-weight="700" letter-spacing="1.5" fill="#B3202C">BLOCKADE</text>
+            </g>
+          </svg>
+        </div>
+      </div>
     </div>
-    <div class="hmap"><svg class="strait" viewBox="0 0 300 210" preserveAspectRatio="none">
-  <rect width="300" height="210" fill="#E7EDF1"/>
-  <path d="M0 0 H300 V58 C262 70 236 54 208 62 C180 70 162 92 146 112 C132 130 104 138 74 132 C46 126 22 134 0 128 Z"
-        fill="#DDD6C6" stroke="#C3BBA8"/>
-  <path d="M0 210 H300 V160 C266 148 244 162 220 146 C202 134 200 116 188 100 C176 84 148 80 120 92 C86 106 52 130 0 140 Z"
-        fill="#DDD6C6" stroke="#C3BBA8"/>
-  <path d="M0 142 C46 132 92 124 130 116 C168 108 190 94 214 84 C240 72 268 74 300 68"
-        stroke="#1F7FA8" stroke-width="1.8" stroke-dasharray="7 6" opacity=".55" fill="none"/>
-  <path d="M262 62 C278 96 278 148 256 182" fill="none" stroke="#B3202C" stroke-width="2.6"/>
-  <text x="10" y="26" fill="#3A3F4A" font-family="Barlow" font-size="13" font-weight="700" letter-spacing="3">IRAN</text>
-  <text x="196" y="200" fill="#3A3F4A" font-family="Barlow" font-size="13" font-weight="700" letter-spacing="3">OMAN</text>
-  <text x="16" y="150" fill="#1F7FA8" font-family="Barlow" font-size="10" font-weight="700" letter-spacing="1.6">PERSIAN GULF</text>
-  <text x="176" y="96" fill="#B3202C" font-family="Barlow" font-size="10" font-weight="700" letter-spacing="1.4">BLOCKADE</text>
-  <text x="96" y="118" fill="#1F7FA8" font-family="Barlow" font-size="9.5" font-weight="700" letter-spacing="1.2">HORMUZ</text>
-  <g transform="translate(150,112) rotate(-8)"><path d="M-13 -4 H13 L8 6 H-8 Z" fill="#5C6674"/><rect x="-6" y="-10" width="12" height="6" fill="#8B95A3"/></g>
-  <circle cx="157" cy="102" r="10" fill="#E5484D" opacity=".30"/><circle cx="157" cy="102" r="3.2" fill="#E5484D"/>
-  <g transform="translate(206,84) rotate(4)"><path d="M-13 -4 H13 L8 6 H-8 Z" fill="#5C6674"/><rect x="-6" y="-10" width="12" height="6" fill="#8B95A3"/></g>
-  <circle cx="213" cy="74" r="11" fill="#E5484D" opacity=".30"/><circle cx="213" cy="74" r="3.4" fill="#E5484D"/>
-  <g transform="translate(240,74) rotate(10)"><path d="M-12 -4 H12 L7 6 H-7 Z" fill="#5C6674"/><rect x="-5" y="-10" width="11" height="6" fill="#8B95A3"/></g>
-  <circle cx="246" cy="64" r="9" fill="#E5484D" opacity=".30"/><circle cx="246" cy="64" r="3" fill="#E5484D"/>
-</svg></div>
+
+    <div class="side">
+      <div class="stack b-af">
+        <div class="stack-head">
+          <span class="nsq r-af">2</span>
+          <span class="place">Gulf of Sirte</span>
+          <span class="section t-af">Ukraine war</span>
+          <span class="pill reported">REPORTED</span>
+        </div>
+        <h3>Ukrainian drones sink Russian warships off Libya</h3>
+        <p class="sdeck">Zelenskyy posts strike video from 2,000 km away; Kremlin says trilateral talks may go to Abu Dhabi.</p>
+      </div>
+      <div class="stack b-eu">
+        <div class="stack-head">
+          <span class="nsq r-eu">3</span>
+          <span class="place">Antalya</span>
+          <span class="section t-eu">Climate</span>
+          <span class="pill reported">REPORTED</span>
+        </div>
+        <h3>COP31 ends with no pact, the first since 2009</h3>
+        <p class="sdeck">Final text drops any mention of fossil fuels; EU refuses to adopt it.</p>
+      </div>
+    </div>
   </div>
-</article>
-<div class="stack"><article class="side" style="--c:#1E7A4B">
-  <div class="krow"><span class="num">02</span><span class="place">Gulf of Sirte</span></div>
-  <div class="sec">Africa · Ukraine war</div>
-  <h3>Ukrainian drones sink Russian warships off Libya</h3>
-  <p>Zelenskyy posts strike video from 2,000 km away; Kremlin says trilateral talks may go to Abu Dhabi.</p>
-</article><article class="side" style="--c:#1F4E9C">
-  <div class="krow"><span class="num">03</span><span class="place">Antalya</span></div>
-  <div class="sec">Europe · Climate</div>
-  <h3>COP31 ends with no pact, the first since 2009</h3>
-  <p>Final text drops any mention of fossil fuels; EU refuses to adopt it.</p>
-</article></div>
-</div>
 
-<div class="cards"><article class="card" style="--c:#5B3E96">
-  <div class="krow"><span class="num">04</span><span class="place">Washington</span><span class="pill ok">REPORTED</span></div>
-  <h3>Trump urges faster federal executions</h3>
-  <p>Attacks Newsom over 548 commutations as the White House pushes a harder line on capital cases.</p>
-</article><article class="card" style="--c:#5B3E96">
-  <div class="krow"><span class="num">05</span><span class="place">Santa Clara</span><span class="pill ok">REPORTED</span></div>
-  <h3>Nvidia reinstates Jensen Huang as CEO</h3>
-  <p>Board reverses itself days after an affair scandal; shares jump 31% and Trump claims credit.</p>
-</article><article class="card" style="--c:#C0661A">
-  <div class="krow"><span class="num">06</span><span class="place">Serang</span><span class="pill live">ONGOING</span></div>
-  <h3>Candy factory fire: 26 body bags recovered</h3>
-  <p>Blaze at the Banten plant burned for hours; dozens of workers still unaccounted for.</p>
-</article><article class="card" style="--c:#C0661A">
-  <div class="krow"><span class="num">07</span><span class="place">Seoul</span><span class="pill ok">REPORTED</span></div>
-  <h3>Russian warplanes enter Korea&#x27;s air zone</h3>
-  <p>Jets scrambled and an island alert issued; Seoul says airspace was not violated.</p>
-</article><article class="card" style="--c:#1E7A4B">
-  <div class="krow"><span class="num">08</span><span class="place">Khartoum</span><span class="pill ok">REPORTED</span></div>
-  <h3>Drone strikes hit Sudan&#x27;s capital, UN building damaged</h3>
-  <p>The UN condemned the strikes, which it suspects came from Ethiopia.</p>
-</article><article class="card" style="--c:#1F4E9C">
-  <div class="krow"><span class="num">09</span><span class="place">Brussels</span><span class="pill live">ONGOING</span></div>
-  <h3>General strike grounds Belgium&#x27;s flights</h3>
-  <p>Brussels and Charleroi shut as unions fight austerity.</p>
-</article><article class="card" style="--c:#1F4E9C">
-  <div class="krow"><span class="num">10</span><span class="place">Manchester</span><span class="pill ok">REPORTED</span></div>
-  <h3>12,000 flee Co-op Live after substance released</h3>
-  <p>Arena evacuated mid-show; cause still unclear.</p>
-</article><article class="card" style="--c:#1F4E9C">
-  <div class="krow"><span class="num">11</span><span class="place">Berlin</span><span class="pill ok">REPORTED</span></div>
-  <h3>Hundreds of German schools get bomb threats</h3>
-  <p>Evacuations across several states; police see no concrete danger.</p>
-</article></div>
-
-<div class="bottom">
-  <div class="briefs"><ul><li style="--c:#5B3E96"><span class="bnum">12</span>
-  <span class="btxt"><b>Court clears Army&#x27;s Iowa explosives burn</b><i>Iowa · Forbes</i></span></li><li style="--c:#5B3E96"><span class="bnum">13</span>
-  <span class="btxt"><b>US blacklists Megaspeed over export controls</b><i>Washington · CNBC</i></span></li><li style="--c:#C0661A"><span class="bnum">14</span>
-  <span class="btxt"><b>Prabowo names two vice-presidential picks</b><i>Jakarta · Antara</i></span></li><li style="--c:#C0661A"><span class="bnum">15</span>
-  <span class="btxt"><b>Kim Yo-jong threatens to shut Swiss office</b><i>Pyongyang · Yonhap</i></span></li><li style="--c:#C0661A"><span class="bnum">16</span>
-  <span class="btxt"><b>GDP grows 6.1%, 2026 forecast raised</b><i>Singapore · CNA</i></span></li><li style="--c:#C0661A"><span class="bnum">17</span>
-  <span class="btxt"><b>Opposition moves to censure a scandal-hit minister</b><i>Tokyo · Nikkei</i></span></li><li style="--c:#C0661A"><span class="bnum">18</span>
-  <span class="btxt"><b>China protests Colombian lawmakers&#x27; Taiwan visit</b><i>Beijing · Global Times</i></span></li><li style="--c:#1E7A4B"><span class="bnum">19</span>
-  <span class="btxt"><b>Oil output falls short of the 1.84m bpd target</b><i>Abuja · The Sun</i></span></li><li style="--c:#1E7A4B"><span class="bnum">20</span>
-  <span class="btxt"><b>World Bank warns El Nino brings floods and drought</b><i>Nairobi · World Bank</i></span></li></ul><ul><li style="--c:#0E6E77"><span class="bnum">21</span>
-  <span class="btxt"><b>Australia and Singapore deepen AI and supply ties</b><i>Canberra · Xinhua</i></span></li><li style="--c:#0E6E77"><span class="bnum">22</span>
-  <span class="btxt"><b>Greens win billions in fines for big tech</b><i>Canberra · Guardian</i></span></li><li style="--c:#1F4E9C"><span class="bnum">23</span>
-  <span class="btxt"><b>Youngest world chess title match opens</b><i>Geneva · The Hindu</i></span></li><li style="--c:#1F4E9C"><span class="bnum">24</span>
-  <span class="btxt"><b>Acropolis Museum reopens after seven years</b><i>Athens · TOI</i></span></li><li style="--c:#B3202C"><span class="bnum">25</span>
-  <span class="btxt"><b>Strikes on Yemen telecom sites kill 17</b><i>Hodeidah · Xinhua</i></span></li><li style="--c:#B3202C"><span class="bnum">26</span>
-  <span class="btxt"><b>Drone strike on a Gaza police post kills three</b><i>Khan Younis · Al Jazeera</i></span></li><li style="--c:#B3202C"><span class="bnum">27</span>
-  <span class="btxt"><b>Houthis say they downed a Wing Loong II</b><i>Lahj · Al Jazeera</i></span></li><li style="--c:#5B3E96"><span class="bnum">28</span>
-  <span class="btxt"><b>Wall Street&#x27;s best day in months</b><i>New York · Reuters</i></span></li><li style="--c:#333A45"><span class="bnum">29</span>
-  <span class="btxt"><b>Oil at a three-month low, gold off its floor</b><i>World · Reuters</i></span></li></ul></div>
-  <div class="mapbox">
-    <div class="mt">WHERE IT HAPPENED</div>
-    <div class="ms">pins = story numbers 1–11</div>
-    <div class="mapwrap"><img src="map.png"><span class="pin" style="left:65.69%;top:40.42%;--c:#B3202C"><b>1</b></span><span class="pin" style="left:55.14%;top:37.32%;--c:#1E7A4B"><b>2</b></span><span class="pin" style="left:58.53%;top:33.17%;--c:#1F4E9C"><b>3</b></span><span class="pin" style="left:28.61%;top:31.76%;--c:#5B3E96"><b>4</b></span><span class="pin" style="left:16.12%;top:32.85%;--c:#5B3E96"><b>5</b></span><span class="pin" style="left:79.49%;top:63.46%;--c:#C0661A"><b>6</b></span><span class="pin" style="left:85.27%;top:32.70%;--c:#C0661A"><b>7</b></span><span class="pin" style="left:59.03%;top:48.24%;--c:#1E7A4B"><b>8</b></span><span class="pin" style="left:51.21%;top:23.35%;--c:#1F4E9C"><b>9</b></span><span class="pin" style="left:49.38%;top:21.49%;--c:#1F4E9C"><b>10</b></span><span class="pin" style="left:53.72%;top:22.18%;--c:#1F4E9C"><b>11</b></span></div>
-    <div class="datecheck"><span class="dc">DATE CHECK</span>
-      <span class="dt">Every story here happened, or was first reported, on <b>Tuesday 24 November 2026</b> — any time zone.</span></div>
+  <!-- h) cards 4-11 -->
+  <div class="cards">
+    <div class="card b-am">
+      <div class="card-head"><span class="nsq r-am">4</span><span class="place">Washington</span><span class="pill reported">REPORTED</span></div>
+      <h4>Trump urges faster federal executions</h4>
+      <p class="cdeck">Attacks Newsom over 548 commutations as the White House pushes a harder line on capital cases.</p>
+    </div>
+    <div class="card b-am">
+      <div class="card-head"><span class="nsq r-am">5</span><span class="place">Santa Clara</span><span class="pill reported">REPORTED</span></div>
+      <h4>Nvidia reinstates Jensen Huang as CEO</h4>
+      <p class="cdeck">Board reverses itself days after an affair scandal; shares jump 31% and Trump claims credit.</p>
+    </div>
+    <div class="card b-as">
+      <div class="card-head"><span class="nsq r-as">6</span><span class="place">Serang</span><span class="pill ongoing">ONGOING</span></div>
+      <h4>Candy factory fire: 26 body bags recovered</h4>
+      <p class="cdeck">Blaze at the Banten plant burned for hours; dozens of workers still unaccounted for.</p>
+    </div>
+    <div class="card b-as">
+      <div class="card-head"><span class="nsq r-as">7</span><span class="place">Seoul</span><span class="pill reported">REPORTED</span></div>
+      <h4>Russian warplanes enter Korea's air zone</h4>
+      <p class="cdeck">Jets scrambled and an island alert issued; Seoul says airspace was not violated.</p>
+    </div>
+    <div class="card b-af">
+      <div class="card-head"><span class="nsq r-af">8</span><span class="place">Khartoum</span><span class="pill reported">REPORTED</span></div>
+      <h4>Drone strikes hit Sudan's capital, UN building damaged</h4>
+      <p class="cdeck">The UN condemned the strikes, which it suspects came from Ethiopia.</p>
+    </div>
+    <div class="card b-eu">
+      <div class="card-head"><span class="nsq r-eu">9</span><span class="place">Brussels</span><span class="pill ongoing">ONGOING</span></div>
+      <h4>General strike grounds Belgium's flights</h4>
+      <p class="cdeck">Brussels and Charleroi shut as unions fight austerity.</p>
+    </div>
+    <div class="card b-eu">
+      <div class="card-head"><span class="nsq r-eu">10</span><span class="place">Manchester</span><span class="pill reported">REPORTED</span></div>
+      <h4>12,000 flee Co-op Live after substance released</h4>
+      <p class="cdeck">Arena evacuated mid-show; cause still unclear.</p>
+    </div>
+    <div class="card b-eu">
+      <div class="card-head"><span class="nsq r-eu">11</span><span class="place">Berlin</span><span class="pill reported">REPORTED</span></div>
+      <h4>Hundreds of German schools get bomb threats</h4>
+      <p class="cdeck">Evacuations across several states; police see no concrete danger.</p>
+    </div>
   </div>
-</div>
 
-<div class="foot">
-  <span><b>HOW SURE</b> · REPORTED = carried by the day's wires or officials · CLAIM = one side's account, labelled · ONGOING = still unfolding · graphics are drawn, not photographed</span>
-  <span>Reuters · AP · Al Jazeera · Xinhua · Yonhap · Antara · UN News · Nikkei</span>
+  <!-- i) bottom: briefs + map card -->
+  <div class="bottom">
+    <div class="briefs">
+      <div class="bcol">
+        <div class="brief"><span class="bnum t-am">12</span><span class="bh">Court clears Army's Iowa explosives burn</span><span class="bs">Iowa · Forbes</span></div>
+        <div class="brief"><span class="bnum t-am">13</span><span class="bh">US blacklists Megaspeed over export controls</span><span class="bs">Washington · CNBC</span></div>
+        <div class="brief"><span class="bnum t-as">14</span><span class="bh">Prabowo names two vice-presidential picks</span><span class="bs">Jakarta · Antara</span></div>
+        <div class="brief"><span class="bnum t-as">15</span><span class="bh">Kim Yo-jong threatens to shut Swiss office</span><span class="bs">Pyongyang · Yonhap</span></div>
+        <div class="brief"><span class="bnum t-as">16</span><span class="bh">GDP grows 6.1%, 2026 forecast raised</span><span class="bs">Singapore · CNA</span></div>
+        <div class="brief"><span class="bnum t-as">17</span><span class="bh">Opposition moves to censure a scandal-hit minister</span><span class="bs">Tokyo · Nikkei</span></div>
+        <div class="brief"><span class="bnum t-as">18</span><span class="bh">China protests Colombian lawmakers' Taiwan visit</span><span class="bs">Beijing · Global Times</span></div>
+        <div class="brief"><span class="bnum t-af">19</span><span class="bh">Oil output falls short of the 1.84m bpd target</span><span class="bs">Abuja · The Sun</span></div>
+      </div>
+      <div class="bcol">
+        <div class="brief"><span class="bnum t-af">20</span><span class="bh">World Bank warns El Nino brings floods and drought</span><span class="bs">Nairobi · World Bank</span></div>
+        <div class="brief"><span class="bnum t-oc">21</span><span class="bh">Australia and Singapore deepen AI and supply ties</span><span class="bs">Canberra · Xinhua</span></div>
+        <div class="brief"><span class="bnum t-oc">22</span><span class="bh">Greens win billions in fines for big tech</span><span class="bs">Canberra · Guardian</span></div>
+        <div class="brief"><span class="bnum t-eu">23</span><span class="bh">Youngest world chess title match opens</span><span class="bs">Geneva · The Hindu</span></div>
+        <div class="brief"><span class="bnum t-eu">24</span><span class="bh">Acropolis Museum reopens after seven years</span><span class="bs">Athens · TOI</span></div>
+        <div class="brief"><span class="bnum t-me">25</span><span class="bh">Strikes on Yemen telecom sites kill 17</span><span class="bs">Hodeidah · Xinhua</span></div>
+        <div class="brief"><span class="bnum t-me">26</span><span class="bh">Drone strike on a Gaza police post kills three</span><span class="bs">Khan Younis · Al Jazeera</span></div>
+      </div>
+      <div class="bcol">
+        <div class="brief"><span class="bnum t-me">27</span><span class="bh">Houthis say they downed a Wing Loong II</span><span class="bs">Lahj · Al Jazeera</span></div>
+        <div class="brief"><span class="bnum t-am">28</span><span class="bh">Wall Street's best day in months</span><span class="bs">New York · Reuters</span></div>
+        <div class="brief"><span class="bnum t-wo">29</span><span class="bh">Oil at a three-month low, gold off its floor</span><span class="bs">World · Reuters</span></div>
+        <div class="brief"><span class="bnum t-as">30</span><span class="bh">Over 300 held at a village scam centre</span><span class="bs">Shan State · Global New Light</span></div>
+        <div class="brief"><span class="bnum t-as">31</span><span class="bh">Thailand suspends 105 cannabis licences</span><span class="bs">Bangkok · Bangkok Post</span></div>
+        <div class="brief"><span class="bnum t-as">32</span><span class="bh">Voters' Form 6 data exposed for years</span><span class="bs">New Delhi · Charchagram</span></div>
+        <div class="brief"><span class="bnum t-eu">33</span><span class="bh">EU EV incentives shut out Japan-built cars</span><span class="bs">Brussels · Nikkei</span></div>
+      </div>
+    </div>
+
+    <div class="mapcard">
+      <div class="mh1">WHERE IT HAPPENED</div>
+      <div class="mh2">pins = story numbers 1-11</div>
+      <div class="mapwrap">
+        <img src="map.png" alt="dotted world map">
+        <div class="pin" style="left:65.7%; top:40.4%; border-color:#B3202C">1</div>
+        <div class="pin" style="left:55.1%; top:37.5%; border-color:#1E7A4B">2</div>
+        <div class="pin" style="left:59.3%; top:32.5%; border-color:#1F4E9C">3</div>
+        <div class="pin" style="left:28.6%; top:31.8%; border-color:#5B3E96">4</div>
+        <div class="pin" style="left:16.1%; top:32.9%; border-color:#5B3E96">5</div>
+        <div class="pin" style="left:79.5%; top:63.5%; border-color:#C0661A">6</div>
+        <div class="pin" style="left:85.3%; top:32.7%; border-color:#C0661A">7</div>
+        <div class="pin" style="left:59.0%; top:48.2%; border-color:#1E7A4B">8</div>
+        <div class="pin" style="left:51.0%; top:26.0%; border-color:#1F4E9C">9</div>
+        <div class="pin" style="left:47.8%; top:20.2%; border-color:#1F4E9C">10</div>
+        <div class="pin" style="left:55.2%; top:21.0%; border-color:#1F4E9C">11</div>
+      </div>
+      <div class="datecheck"><b>DATE CHECK</b>Every story here happened, or was first reported, on Tuesday 24 November 2026 — any time zone.</div>
+    </div>
+  </div>
+
+  <!-- j) footer -->
+  <div class="footer">
+    <div><b>HOW SURE</b>&nbsp; REPORTED = on the day's wires · CLAIM = one side's account, labelled · ONGOING = still unfolding · graphics are drawn, not photographed</div>
+    <div class="src"><b>SOURCES</b>&nbsp; Reuters · AP · Al Jazeera · Xinhua · Yonhap · Antara · UN News · Nikkei</div>
+  </div>
+
 </div>
-</div></body></html>
+</body>
+</html>
