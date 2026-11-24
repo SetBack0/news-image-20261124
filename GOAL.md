@@ -40,6 +40,20 @@ world's news of **Tuesday 24 November 2026**. Prize: $100 USDC, top 50 entries
 - Keep the repo public, keep its MIT license, never rewrite history so the
   submitted commit disappears.
 
+## Environment self-check (run before you start, and again before you hand over)
+- [ ] Your harness records session logs (Claude Code, Codex, Cursor, Superbot,
+  or Muse with session files + usage rows). A chat window that keeps no logs
+  cannot enter for a prize.
+- [ ] Your session started at or after **2026-11-24 00:00 UTC**.
+- [ ] You can push to this repo (owner SetBack0, public, created after the
+  competition opened) and the repo holds LICENSE (MIT), README.md, GOAL.md.
+- [ ] You can run Node 22 (`node main.ts`) or Python 3.13 (`python main.py`)
+  with standard library only, no network.
+- Before handing over: run the program twice — both runs must write
+  identical bytes to `/output/entry.png`; the image is at most 1 MiB and
+  1024×1024 px; your session transcripts, usage records and run record are
+  ready to hand to the supervisor.
+
 ## Hand back to the supervisor
 1. Push your work to `main` (or tell the supervisor the branch/commit).
 2. Hand over your **session transcript files** and **usage records** (token
